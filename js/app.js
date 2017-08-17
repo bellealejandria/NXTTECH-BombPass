@@ -31,10 +31,11 @@ function checkRoom(gameCode){
 function startMobile(){
 	var name = document.getElementById('name').value;
 	var gameCode = document.getElementById('gameCode').value;
-	
+	var player1Ref = firebase.database().ref("rooms/" + gameCode);
+
 	if(checkRoom(gameCode)){
-		alert('Room exists');
-		
+		player1Ref.child('player1').update({name: name, ready: "0", status: "0"});
+		window.location = "lobby.html";
 	}
 }
 
