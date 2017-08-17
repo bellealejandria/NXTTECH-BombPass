@@ -9,6 +9,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
+//global vars
+var name;
+
 //functions
 function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
@@ -29,7 +32,7 @@ function checkRoom(gameCode){
 }
 
 function startMobile(){
-	var name = document.getElementById('name').value;
+	name = document.getElementById('name').value;
 	var gameCode = document.getElementById('gameCode').value;
 	var gameRef = firebase.database().ref("rooms/" + gameCode);
 

@@ -47,11 +47,11 @@ function createRoom(){
 
 
 window.onload = function() {
-	
-	document.getElementById("status").innerHTML = config.databaseURL;	
-	document.getElementById("gameCode").innerHTML = generateGameCode();
 
-	if(screen.width > 480)
+	if(screen.width > 480){
+		document.getElementById("status").innerHTML = config.databaseURL;	
+		document.getElementById("gameCode").innerHTML = generateGameCode();
 		createRoom();
+	}
 	
 }
