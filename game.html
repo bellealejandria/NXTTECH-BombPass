@@ -63,7 +63,7 @@
 							<div class="row">
 								<div class="col-lg-10 col-lg-offset-1 no-padding">
 									<span class="title">BombPass</span>
-									<span class="title small-title small-title-3">Last Man Standing</span>
+									<span class="title small-title small-title-3" id="ready">Last Man Standing</span>
 									<br>
 								</div>
 							</div>
@@ -76,23 +76,22 @@
 													<img class="img-responsive" src="assets/img/001-diver.png"/>
 												</div>
 												<div class="row text-center">
-													<span class="title small-title">Denesis</span>
+													<span class="title small-title" id="playername-1">Denesis</span>
 												</div>
-												<div class="row">
+												<div class="row" id="bmbplayer1">
 													
 												</div>
 											</div>
 										</div>
-										<div class=" active col-lg-3" id="player2">
+										<div class="col-lg-3" id="player2">
 											<div class="test">
 												<div class="row">
 													<img class="img-responsive" src="assets/img/002-welder.png"/>
 												</div>
 												<div class="row text-center">
-													<span class="title small-title">Jason</span>
+													<span class="title small-title" id="playername-2">Jason</span>
 												</div>
-												<div class="row">
-													<img class="img-responsive col-lg-8 col-lg-offset-2" src="assets/img/bomb.png"/>
+												<div class="row" id="bmbplayer2">
 												</div>
 											</div>
 										</div>
@@ -102,9 +101,9 @@
 													<img class="img-responsive" src="assets/img/004-firefighter.png"/>
 												</div>
 												<div class="row text-center">
-													<span class="title small-title"><i class="material-icons">close</i> Miguel</span>
+													<span class="title small-title" id="playername-3">Miguel</span>
 												</div>
-												<div class="row">
+												<div class="row" id="bmbplayer3">
 												</div>
 											</div>
 										</div>
@@ -114,9 +113,9 @@
 													<img class="img-responsive" src="assets/img/009-doctor.png"/>
 												</div>
 												<div class="row text-center">
-													<span class="title small-title">Belle</span>
+													<span class="title small-title" id="playername-4">Belle</span>
 												</div>
-												<div class="row">
+												<div class="row" id="bmbplayer4">
 												</div>
 											</div>
 										</div>
@@ -151,7 +150,7 @@
 							<span class="title small-title small-title-mobile">Pass the bomb to</span>
 						</div>
 					</div>
-					<div class="row" id="player">
+					<div class="row" id="playerbtn1">
 						<div class="col-sm-10 col-xs-10 col-xs-offset-1 col-sm-offset-1">
 							<a href="#">
 								<div class="menu-container r">
@@ -162,7 +161,7 @@
 							</a>	
 						</div>
 					</div>
-					<div class="row" id="player">
+					<div class="row" id="playerbtn2">
 						<div class="col-sm-10 col-xs-10 col-xs-offset-1 col-sm-offset-1">
 							<a href="#">
 								<div class="menu-container g">
@@ -173,7 +172,7 @@
 							</a>	
 						</div>
 					</div>
-					<div class="row" id="player">
+					<div class="row" id="playerbtn3">
 						<div class="col-sm-10 col-xs-10 col-xs-offset-1 col-sm-offset-1">
 							<a href="#">
 								<div class="menu-container b">
@@ -207,7 +206,6 @@
         <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 
         <!-- CUSTOM -->
-        <script src="js/app.js"></script> 
         <script src="js/jsgame.js"></script>  
 
     </footer>
