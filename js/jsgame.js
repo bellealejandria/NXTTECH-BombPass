@@ -1,4 +1,4 @@
-// Initialize Firebase
+/*// Initialize Firebase
 var config = {
     apiKey: "AIzaSyDggdwXC75QRKKZClRa7K2kQKrpXOhZuoQ",
     authDomain: "awesomesiocoholics-40485.firebaseapp.com",
@@ -7,7 +7,7 @@ var config = {
     storageBucket: "awesomesiocoholics-40485.appspot.com",
     messagingSenderId: "73321800985"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(config);*/
 
 //global var
 var playerCount = 0;
@@ -20,13 +20,6 @@ function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
 }
 
-function roomExistsCallback(gameCode, exists) {
-  if (exists) {
-    // alert('game code: ' + gameCode + ' exists!');
-  } else {
-    // alert('game code: ' + gameCode + ' does not exist!');
-  }
-}
 
 //Inital State
 function setStart(){
@@ -153,17 +146,12 @@ function startGame(){
 
 window.onload = function() {
   var ctr;
-	var database = firebase.database();
 	var roomRef = firebase.database().ref("rooms");
 
   setStart();
   addPlayers();
 
-	// check if gameCode exists
-	/*roomRef.child("ABC12").once('value', function(snapshot) {
-    	var exists = (snapshot.val() !== null);
-    	roomExistsCallback("ABC12", exists);
-	});*/
+  console.log(name)
 
 };
 	
