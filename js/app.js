@@ -38,9 +38,6 @@ function startMobile(){
 		window.location = "lobby.html";
 	}
 }
-
-	//db.ref("-Users/-KUanJA9egwmPsJCxXpv).update({ displayName: "New trainer" });
-	//window.location = "lobby.html";
 	
 
 window.onload = function() {
