@@ -31,11 +31,21 @@ function checkRoom(gameCode){
 function startMobile(){
 	var name = document.getElementById('name').value;
 	var gameCode = document.getElementById('gameCode').value;
-	var player1Ref = firebase.database().ref("rooms/" + gameCode);
+	var gameRef = firebase.database().ref("rooms/" + gameCode);
 
 	if(checkRoom(gameCode)){
-		player1Ref.child('player1').update({name: name, ready: "0", status: "0"});
-		window.location = "lobby.html";
+		gameRef.once("value").then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+            var key = childSnapshot.key; //player1, player2, player3, player4
+            var childData = snapshot.child(key).child("name").val(); //name
+
+            	if(!childData){
+            		gameRef.child(key).update({name: name, ready: "0", status: "0"});
+					window.location = "lobby.html";
+					return true;
+				}
+            });
+		});
 	}
 }
 	
