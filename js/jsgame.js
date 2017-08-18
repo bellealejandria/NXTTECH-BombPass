@@ -38,16 +38,17 @@ function addPlayers(){
   var ctr;
   var database = firebase.database();
   var roomRef = firebase.database().ref("rooms");
+  var gameCode = localStorage.getItem("gameCode");
 
   //Counts all the players in the database and logs their name
   roomRef.once("value", function(snapshot){
-    var players = snapshot.child("3967A").val();
+    var players = snapshot.child(gameCode).val();
 
     Object.keys(players).forEach(function(key) {
-      if(snapshot.child("3967A").child(key).child("name").val() != ""){
-        console.log(snapshot.child("3967A").child(key).child("name").val());
+      if(snapshot.child(gameCode).child(key).child("name").val() != ""){
+        console.log(snapshot.child(gameCode).child(key).child("name").val());
 
-        playerName[playerCount] = snapshot.child("3967A").child(key).child("name").val();
+        playerName[playerCount] = snapshot.child(gameCode).child(key).child("name").val();
         playerCount++;
       }
     })
@@ -142,6 +143,7 @@ function startGame(){
 
   randomizeBomb();
   bombCounter();
+
 }
 
 window.onload = function() {
@@ -151,7 +153,11 @@ window.onload = function() {
   setStart();
   addPlayers();
 
-  console.log(name)
+  console.log(localStorage.getItem("gameCode"));
+  console.log(localStorage.getItem("playerName"));
+
+  var changeName = localStorage.getItem("playerName");
+  document.getElementById("playerName").innerHTML = changeName;
 
 };
 	

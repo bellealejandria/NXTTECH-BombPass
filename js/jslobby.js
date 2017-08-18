@@ -9,6 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var code;
+
 //functions
 function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
@@ -45,12 +47,27 @@ function createRoom(){
 	roomsRef.child("player4").child("ready").set("0");
 }
 
+function setRoomCode(){
+	localStorage.setItem("gameCode", code);
+	window.location = "game.html";
+}
+
+function updateReady(){
+	var gameCode = localStorage.getItem("gameCode");
+	var playerName = localStorage.getItem("playerName");
+	var gameRef = firebase.database().ref("rooms/" + gameCode + "/" + playerName).update({ready: "1"});
+
+	
+
+}
 
 window.onload = function() {
 
 	if(screen.width > 480){
 		document.getElementById("status").innerHTML = config.databaseURL;	
-		document.getElementById("gameCode").innerHTML = generateGameCode();
+		
+		code = generateGameCode();
+		document.getElementById("gameCode").innerHTML = code;
 		createRoom();
 	}
 	

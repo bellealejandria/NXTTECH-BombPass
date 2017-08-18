@@ -43,6 +43,7 @@ function startMobile(){
             var childData = snapshot.child(key).child("name").val(); //name
 
             	if(!childData){
+            		localStorage.setItem("playerName", name);
             		gameRef.child(key).update({name: name, ready: "0", status: "0"});
 					window.location = "lobby.html";
 					return true;
