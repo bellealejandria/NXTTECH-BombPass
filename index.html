@@ -191,6 +191,12 @@
         <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 
         <!-- CUSTOM -->
+        <script>
+		        $("#comment-text-area").focus(function() {
+		    var height = $("body").css('height');
+		    $("body").css('height', height);
+		});
+        </script>
         <script src="js/app.js"></script>  
         
     </footer>
