@@ -57,7 +57,7 @@ function updateReady(){
 	var playerName = localStorage.getItem("playerName");
 	var gameRef = firebase.database().ref("rooms/" + gameCode + "/" + playerName).update({ready: "1"});
 
-	
+	window.location = "game.html";
 
 }
 
