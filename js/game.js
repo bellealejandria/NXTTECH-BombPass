@@ -3,9 +3,6 @@
 //STATUS 1 IF HAWAK BOMB
 //STATUS 0 WAITING
 
-//READY 1 IF NAKAPASOK NA
-//READ 0 IF DI PA
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDggdwXC75QRKKZClRa7K2kQKrpXOhZuoQ",
@@ -56,7 +53,7 @@ function addPlayers(){
 
     Object.keys(players).forEach(function(key) {
       if(snapshot.child(gameCode).child(key).child("name").val() != ""){
-        console.log(snapshot.child(gameCode).child(key).child("name").val());
+        //console.log(snapshot.child(gameCode).child(key).child("name").val());
 
         playerName[playerCount] = snapshot.child(gameCode).child(key).child("name").val();
         playerCount++;
@@ -80,7 +77,7 @@ function addPlayers(){
     for(ctr = 3; ctr > playerBtnCount; ctr--){
       $("#playerbtn" + ctr).hide();
     }
-    
+
     startGame();
   });
 
@@ -170,12 +167,11 @@ window.onload = function() {
   setStart();
   addPlayers();
 
-  console.log(localStorage.getItem("gameCode"));
-  console.log(localStorage.getItem("playerName"));
+  /*console.log(localStorage.getItem("gameCode"));
+  console.log(localStorage.getItem("playerName"));*/
 
   var changeName = localStorage.getItem("playerName");
   document.getElementById("playerName").innerHTML = changeName;
-
 };
 
 //FOR THIS WEB DESKTOP//

@@ -72,6 +72,12 @@ function updateReady(){
 	});
 }
 
+function startGame(){
+	var PCgameCode = localStorage.getItem("PCgameCode");
+	var gameRef = firebase.database().ref("rooms/" + PCgameCode).update({startGame: "1"});
+	window.location = "game.html";
+}
+
 window.onload = function() {
 	ctr = 0;
 
@@ -90,7 +96,6 @@ window.onload = function() {
 				ctr++;
 				document.getElementById("numPlayers").innerHTML = ctr;
 			}
-			
 		});
 
 		player2.on("value", function(snapshot) {
@@ -118,7 +123,7 @@ window.onload = function() {
 	}
 	else{
 		var localGameCode = localStorage.getItem("gameCode");
-		var playerName = localStorage.getItem("playerName");
+
 		var roomRef = firebase.database().ref("rooms/" + localGameCode);
 		var gameRef = roomRef.child("startGame");
 

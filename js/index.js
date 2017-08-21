@@ -36,13 +36,13 @@ function startMobile(){
 	if(checkRoom(gameCode)){
 		gameRef.once("value").then(function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
-            var key = childSnapshot.key; //player1, player2, player3, player4
-            var childData = snapshot.child(key).child("name").val(); //name
+	            var key = childSnapshot.key; //player1, player2, player3, player4
+	            var childData = snapshot.child(key).child("name").val(); //name
 
             	if(!childData){
             		localStorage.setItem("playerName", name);
             		localStorage.setItem("gameCode", gameCode);
-            		gameRef.child(key).update({name: name, ready: "0", status: "0"});
+            		gameRef.child(key).update({name: name, status: "0"});
 					window.location = "lobby.html";
 					return true;
 				}
