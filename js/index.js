@@ -9,9 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//global vars
-var name;
-
 //functions
 function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
@@ -19,9 +16,9 @@ function muteAudio() {
 
 
 function checkRoom(gameCode){
-	var roomRef = firebase.database().ref("rooms/" + gameCode);
+	var gameRef = firebase.database().ref("rooms/" + gameCode);
 	var checker;
-	roomRef.on('value', function(snapshot) {
+	gameRef.on('value', function(snapshot) {
 	   if (snapshot.exists())
 	      checker = true;
 	   else
@@ -32,7 +29,7 @@ function checkRoom(gameCode){
 }
 
 function startMobile(){
-	name = document.getElementById('name').value;
+	var name = document.getElementById('name').value;
 	var gameCode = document.getElementById('gameCode').value;
 	var gameRef = firebase.database().ref("rooms/" + gameCode);
 
@@ -44,6 +41,7 @@ function startMobile(){
 
             	if(!childData){
             		localStorage.setItem("playerName", name);
+            		localStorage.setItem("gameCode", gameCode);
             		gameRef.child(key).update({name: name, ready: "0", status: "0"});
 					window.location = "lobby.html";
 					return true;

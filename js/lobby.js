@@ -9,8 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var code;
-
 //functions
 function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
@@ -26,10 +24,10 @@ function generateGameCode() {
   return text;
 }
 
-function createRoom(){
-	var gameCode = document.getElementById('gameCode').innerHTML;
-
+function createRoom(gameCode){
 	var roomsRef = firebase.database().ref("rooms/" + gameCode);
+
+	roomsRef.child("startGame").set("0");
 	roomsRef.child("player1").child("name").set("");
 	roomsRef.child("player1").child("status").set("0");
 	roomsRef.child("player1").child("ready").set("0");
@@ -47,28 +45,48 @@ function createRoom(){
 	roomsRef.child("player4").child("ready").set("0");
 }
 
-function setRoomCode(){
-	localStorage.setItem("gameCode", code);
-	window.location = "game.html";
-}
-
 function updateReady(){
-	var gameCode = localStorage.getItem("gameCode");
-	var playerName = localStorage.getItem("playerName");
-	var gameRef = firebase.database().ref("rooms/" + gameCode + "/" + playerName).update({ready: "1"});
+	localGameCode = localStorage.getItem("gameCode");
+	playerName = localStorage.getItem("playerName");
+	var gameRef = firebase.database().ref("rooms/" + localGameCode);
 
-	window.location = "game.html";
+	gameRef.once("value").then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key; //player1, player2, player3, player4
+        var childData = snapshot.child(key).child("name").val(); //player-name
 
+        	if(childData === playerName){
+        		gameRef.child(key).update({ready: "1"});
+
+				$("#readyBtn").hide();
+				$("#waitInfo").show();
+
+				return true;
+			}
+        });
+	});
 }
 
 window.onload = function() {
 
-	if(screen.width > 480){
-		document.getElementById("status").innerHTML = config.databaseURL;	
-		
-		code = generateGameCode();
-		document.getElementById("gameCode").innerHTML = code;
-		createRoom();
+	if(screen.width > 480){		
+		var gameCode = generateGameCode();
+		document.getElementById("gameCode").innerHTML = gameCode;
+		createRoom(gameCode);
 	}
+	else{
+		localGameCode = localStorage.getItem("gameCode");
+		playerName = localStorage.getItem("playerName");
+		var roomRef = firebase.database().ref("rooms/" + localGameCode);
+		var gameRef = roomRef.child("startGame");
+
+		gameRef.on('value', function (snap) {
+        	if(snap.val() === "1"){
+        		window.location = "game.html";
+        	}
+    	});
+		
+	}
+	
 	
 }
