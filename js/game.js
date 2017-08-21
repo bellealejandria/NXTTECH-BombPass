@@ -41,26 +41,23 @@ function setStart(){
 function addPlayers(){
 
   var ctr;
-  var database = firebase.database();
-  var roomRef = firebase.database().ref("rooms");
   var gameCode = localStorage.getItem("gameCode");
+  var gameRef = firebase.database().ref("rooms/" + gameCode);
 
-  //Counts all the players in the database and logs their name
-  roomRef.once("value", function(snapshot){
-    var players = snapshot.child(gameCode).val();
+  gameRef.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key; //player1, player2, player3, player4
+      var childData = snapshot.child(key).child("name").val(); //name
 
-    ////CHANGE CODE DUN GAWIN NA KUNG ANO UNG NA GENERATE NA GAME CODE(?) KANINA////
-
-    Object.keys(players).forEach(function(key) {
-      if(snapshot.child(gameCode).child(key).child("name").val() != ""){
-        //console.log(snapshot.child(gameCode).child(key).child("name").val());
-
-        playerName[playerCount] = snapshot.child(gameCode).child(key).child("name").val();
+      if(childData){
+        console.log(childData);
+        playerName[playerCount] = childData;
         playerCount++;
-      }
-    })
 
-    //Removes the player icons not used
+      }
+    });
+
+      //Removes the player icons not used
     for(ctr = 0; ctr < playerCount; ctr++){
       playerAlive.push("player" + (ctr + 1));
       $("#player" + (ctr + 1)).show();
@@ -69,6 +66,7 @@ function addPlayers(){
     //Changes player names
     for(ctr = 0; ctr < playerCount; ctr++){
       $("#playername-" + (ctr + 1)).html(playerName[ctr]);
+      
     }
 
     //CAN REMOVE PERO WAG MUNA//
@@ -80,6 +78,7 @@ function addPlayers(){
 
     startGame();
   });
+
 
 }
 
