@@ -9,6 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var ctr;
+
 //functions
 function muteAudio() {
 	var audioElm = document.getElementById('audio'); audioElm.muted = !audioElm.muted;
@@ -24,7 +26,10 @@ function generateGameCode() {
   return text;
 }
 
+
+
 function createRoom(gameCode){
+	localStorage.setItem("PCgameCode", gameCode);
 	var roomsRef = firebase.database().ref("rooms/" + gameCode);
 
 	roomsRef.child("startGame").set("0");
@@ -46,8 +51,8 @@ function createRoom(gameCode){
 }
 
 function updateReady(){
-	localGameCode = localStorage.getItem("gameCode");
-	playerName = localStorage.getItem("playerName");
+	var localGameCode = localStorage.getItem("gameCode");
+	var playerName = localStorage.getItem("playerName");
 	var gameRef = firebase.database().ref("rooms/" + localGameCode);
 
 	gameRef.once("value").then(function(snapshot) {
@@ -68,15 +73,52 @@ function updateReady(){
 }
 
 window.onload = function() {
+	ctr = 0;
 
 	if(screen.width > 480){		
 		var gameCode = generateGameCode();
 		document.getElementById("gameCode").innerHTML = gameCode;
 		createRoom(gameCode);
+
+		var player1 = firebase.database().ref("rooms/" + gameCode).child("player1").child("name");
+		var player2 = firebase.database().ref("rooms/" + gameCode).child("player2").child("name");
+		var player3 = firebase.database().ref("rooms/" + gameCode).child("player3").child("name");
+		var player4 = firebase.database().ref("rooms/" + gameCode).child("player4").child("name");
+		
+		player1.on("value", function(snapshot) {
+			if(snapshot.val()){
+				ctr++;
+				document.getElementById("numPlayers").innerHTML = ctr;
+			}
+			
+		});
+
+		player2.on("value", function(snapshot) {
+			if(snapshot.val()){
+				ctr++;
+				document.getElementById("numPlayers").innerHTML = ctr;
+			}
+		});
+
+		player3.on("value", function(snapshot) {
+			if(snapshot.val()){
+				ctr++;
+				document.getElementById("numPlayers").innerHTML = ctr;
+			}
+		});
+
+		player4.on("value", function(snapshot) {
+			if(snapshot.val()){
+				ctr++;
+				document.getElementById("numPlayers").innerHTML = ctr;
+			}
+		});
+
+		
 	}
 	else{
-		localGameCode = localStorage.getItem("gameCode");
-		playerName = localStorage.getItem("playerName");
+		var localGameCode = localStorage.getItem("gameCode");
+		var playerName = localStorage.getItem("playerName");
 		var roomRef = firebase.database().ref("rooms/" + localGameCode);
 		var gameRef = roomRef.child("startGame");
 

@@ -6,7 +6,7 @@
 //READY 1 IF NAKAPASOK NA
 //READ 0 IF DI PA
 
-/*// Initialize Firebase
+// Initialize Firebase
 var config = {
     apiKey: "AIzaSyDggdwXC75QRKKZClRa7K2kQKrpXOhZuoQ",
     authDomain: "awesomesiocoholics-40485.firebaseapp.com",
@@ -15,7 +15,7 @@ var config = {
     storageBucket: "awesomesiocoholics-40485.appspot.com",
     messagingSenderId: "73321800985"
 };
-firebase.initializeApp(config);*/
+firebase.initializeApp(config);
 
 //global var
 var playerCount = 0;
@@ -80,11 +80,7 @@ function addPlayers(){
     for(ctr = 3; ctr > playerBtnCount; ctr--){
       $("#playerbtn" + ctr).hide();
     }
-    //////////////////////////
-
-    ////////////INSERT CODE IF READY LAHAT THEN START GAME////////////////
-    //NO IDEA PANO//
-
+    
     startGame();
   });
 
