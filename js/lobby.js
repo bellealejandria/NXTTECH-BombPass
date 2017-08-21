@@ -35,19 +35,15 @@ function createRoom(gameCode){
 	roomsRef.child("startGame").set("0");
 	roomsRef.child("player1").child("name").set("");
 	roomsRef.child("player1").child("status").set("0");
-	roomsRef.child("player1").child("ready").set("0");
 
 	roomsRef.child("player2").child("name").set("");
 	roomsRef.child("player2").child("status").set("0");
-	roomsRef.child("player2").child("ready").set("0");
 
 	roomsRef.child("player3").child("name").set("");
 	roomsRef.child("player3").child("status").set("0");
-	roomsRef.child("player3").child("ready").set("0");
 
 	roomsRef.child("player4").child("name").set("");
 	roomsRef.child("player4").child("status").set("0");
-	roomsRef.child("player4").child("ready").set("0");
 }
 
 function updateReady(){
