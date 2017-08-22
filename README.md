@@ -1,0 +1,3 @@
+# NXTTECH-BombPass
+
+BombPass is a mobile + web multiplayer game implemented using Firebase as a hosting service and its realtime database. BombPass makes use of mobile devices as controllers with a browser on a bigger screen serving as the play area. Each player uses their mobile device to connect to a lobby that can be created on the web client. Only the web client has the privilege to start the game. Once the game starts, each mobile devices will be redirected to the game. The goal of the game is to survive and be the last player remaining in the game. This is done by passing around a bomb to other players by tapping their respective name. Players are elimintated when the time runs out and bomb detonates on them. 
